@@ -7,11 +7,11 @@ var path = require('path');
 var ParseDashboard = require('parse-dashboard');
 
 var databaseUri = process.env.DATABASE_URI || process.env.MONGODB_URI;
-var MASTER_KEY = process.env.MASTER_KEY || '12345678'; //Add your master key here. Keep it secret!
+var MASTER_KEY = process.env.MASTER_KEY || '70c6093dba5a7e55968a1c7ad3dd3e5a74ef5cac'; //Add your master key here. Keep it secret!
 var IS_DEVELOPMENT = process.env.NODE_ENV !== 'production';
 var DASHBOARD_AUTH = process.env.DASHBOARD_AUTH || null;
 var SERVER_URL = process.env.SERVER_URL || 'http://localhost:1337/parse';  // Don't forget to change to https if needed
-var APP_ID = process.env.APP_ID || 'myAppId';
+var APP_ID = process.env.APP_ID || 'team-hug-app';
 
 if (!databaseUri) {
   console.log('DATABASE_URI not specified, falling back to localhost.');
@@ -25,7 +25,13 @@ var api = new ParseServer({
   serverURL: SERVER_URL,
   liveQuery: {
     classNames: ["Posts", "Comments"] // List of classes to support for query subscriptions
-  }
+  },
+  push: {
+     android: {
+       senderId: '439066530470',
+       apiKey: 'AIzaSyDWtUG0RXMbsjZ4Z2JvRPZYDaW85mX_rTE'
+     }
+   }
 });
 // Client-keys like the javascript key or the .NET key are not necessary with parse-server
 // If you wish you require them, you can set them as options in the initialization above:
